@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'ifsa-admissiom-1.onrender.com',
+    'ifsa-admissiom.onrender.com',
     'localhost',
     '127.0.0.1'
 ]

@@ -1,0 +1,10 @@
+# Fichiers Django inutiles
+*.pyc
+__pycache__
+db.sqlite3
+/media
+
+# Environnement virtuel (très important de ne pas l'envoyer !)
+venv/
+env/
+.env

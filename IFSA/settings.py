@@ -10,8 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import dj_database_url
+from django.contrib.auth import get_user_model
 import os
 from pathlib import Path
+
+# Création du superuser automatiquement
+def create_superuser():
+    User = get_user_model()
+    if not User.objects.filter(username=os.environ.get("DJANGO_SUPERUSER_USERNAME")).exists():
+        User.objects.create_superuser(
+            username=os.environ.get("DJANGO_SUPERUSER_USERNAME"),
+            email=os.environ.get("DJANGO_SUPERUSER_EMAIL"),
+            password=os.environ.get("DJANGO_SUPERUSER_PASSWORD")
+        )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

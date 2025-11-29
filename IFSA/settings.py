@@ -14,7 +14,7 @@ from django.contrib.auth import get_user_model
 import os
 from pathlib import Path
 
-# Création du superuser automatiquement
+# Fonction pour la création du superuser automatiquement s<il n'existe pas.
 def create_superuser():
     User = get_user_model()
     if not User.objects.filter(username=os.environ.get("DJANGO_SUPERUSER_USERNAME")).exists():
@@ -23,6 +23,7 @@ def create_superuser():
             email=os.environ.get("DJANGO_SUPERUSER_EMAIL"),
             password=os.environ.get("DJANGO_SUPERUSER_PASSWORD")
         )
+# Execution du superuser
 create_superuser()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

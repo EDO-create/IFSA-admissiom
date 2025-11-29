@@ -23,7 +23,7 @@ def create_superuser():
             email=os.environ.get("DJANGO_SUPERUSER_EMAIL"),
             password=os.environ.get("DJANGO_SUPERUSER_PASSWORD")
         )
-
+create_superuser()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'

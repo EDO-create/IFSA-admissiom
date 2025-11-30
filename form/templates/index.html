@@ -133,7 +133,6 @@
             border-bottom: none;
         }
         .tab-content {
-            display: none;
             animation: fadeIn 0.3s ease-in-out;
         }
         .tab-content.active {
@@ -1020,31 +1019,6 @@
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- SCRIPT POUR LES ONGLETS (Ajoute ceci juste avant </body> ou dans ton fichier JS) -->
-<script>
-    function switchTab(tabName) {
-        // 1. Réinitialiser tous les boutons (Style inactif)
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.className = "tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50";
-        });
 
-        // 2. Cacher tous les contenus
-        document.querySelectorAll('.tab-content').forEach(content => {
-            content.classList.add('hidden');
-        });
-
-        // 3. Activer le bouton cliqué (Style actif : Blanc + Ombre + Couleur spécifique)
-        const activeBtn = document.getElementById('btn-' + tabName);
-        let activeColorClass = "text-slate-900"; // Couleur par défaut
-        if(tabName === 'mission') activeColorClass = "text-blue-600";
-        if(tabName === 'vision') activeColorClass = "text-sky-500";
-        if(tabName === 'valeurs') activeColorClass = "text-emerald-600";
-
-        activeBtn.className = `tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 bg-white shadow-sm ring-1 ring-slate-200 ${activeColorClass}`;
-
-        // 4. Afficher le contenu correspondant
-        document.getElementById('content-' + tabName).classList.remove('hidden');
-    }
-</script>
 </body>
 </html>

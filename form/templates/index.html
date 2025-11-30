@@ -139,10 +139,6 @@
         .tab-content.active {
             display: block;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         /* Animation simple pour le changement d'onglet */
     .animate-fade-in {
@@ -934,9 +930,8 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script>
-        // Navigation SPA
+       <script>
+        // ================= NAVIGATION SPA =================
         function navigateTo(pageId) {
             document.querySelectorAll('.page-section').forEach(p => {
                 p.classList.remove('active-page');
@@ -952,7 +947,7 @@
             });
         }
 
-        // Mobile Menu
+        // ================= MOBILE MENU =================
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
         
@@ -967,25 +962,36 @@
             menu.classList.remove('is-open');
             setTimeout(() => menu.classList.add('hidden'), 400);
         }
-        btn.addEventListener('click', toggleMenu);
+        if(btn) btn.addEventListener('click', toggleMenu);
 
-        // TABS LOGIC (Nouveau pour Mobile)
-        function openTab(tabName) {
-            // 1. Cacher tous les contenus
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(c => c.classList.remove('active'));
-            
-            // 2. Désactiver tous les boutons
-            const btns = document.querySelectorAll('.tab-btn');
-            btns.forEach(b => b.classList.remove('active'));
-            
-            // 3. Activer le bon contenu et le bon bouton
-            document.getElementById('tab-' + tabName).classList.add('active');
-            document.getElementById('btn-' + tabName).classList.add('active');
+        // ================= NOUVELLE LOGIQUE TABS (Mission/Vision) =================
+        function switchTab(tabName) {
+            // 1. Réinitialiser tous les boutons (Style inactif gris)
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50";
+            });
+
+            // 2. Cacher tous les contenus
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // 3. Activer le bouton cliqué (Style actif blanc + couleur)
+            const activeBtn = document.getElementById('btn-' + tabName);
+            let activeColorClass = "text-slate-900"; 
+            if(tabName === 'mission') activeColorClass = "text-blue-600";
+            if(tabName === 'vision') activeColorClass = "text-sky-500";
+            if(tabName === 'valeurs') activeColorClass = "text-emerald-600";
+
+            // On applique les classes Tailwind "Active"
+            activeBtn.className = `tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 bg-white shadow-sm ring-1 ring-slate-200 ${activeColorClass}`;
+
+            // 4. Afficher le contenu correspondant
+            const contentToShow = document.getElementById('content-' + tabName);
+            if(contentToShow) contentToShow.classList.remove('hidden');
         }
 
-
-        // Fade In Scroll
+        // ================= SCROLL ANIMATION (Fade In) =================
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -993,8 +999,10 @@
                 }
             });
         }, { threshold: 0.1 });
+        
+        // On observe tous les éléments avec la classe .fade-in-section
         document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-
+           
     </script>
     
     <!-- Google Translate Init -->

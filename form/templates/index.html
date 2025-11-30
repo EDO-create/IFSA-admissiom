@@ -144,6 +144,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Animation simple pour le changement d'onglet */
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
 
         /* Animations */
         #mobile-menu { transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out; overflow: hidden; max-height: 0; opacity: 0; }
@@ -336,102 +345,105 @@
             </section>
 
             <!-- Identité Institutionnelle (Mission / Vision / Valeurs) -->
-            <!-- Sur PC : Grid 3 colonnes. Sur Mobile : Tabs (Onglets) -->
-            <section class="py-16 bg-slate-50 fade-in-section border-b border-slate-200">
-                <div class="container mx-auto px-6">
+<section class="py-12 md:py-20 bg-slate-50 border-b border-slate-200">
+    <div class="container mx-auto px-4 md:px-6">
+
+        <!-- ================= VERSION PC (Grid 3 colonnes) ================= -->
+        <div class="hidden md:grid md:grid-cols-3 gap-8">
+            
+            <!-- Carte Mission -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-blue-200 hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Notre Mission</h3>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Former des cadres compétents, intègres et innovants, capables de répondre aux défis complexes du marché du travail haïtien et de contribuer au développement durable.
+                </p>
+            </div>
+
+            <!-- Carte Vision -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-sky-200 hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 text-sky-500 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Notre Vision</h3>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Être un acteur clé de la formation universitaire dans la Région des Palmes, reconnu pour le sérieux de son enseignement et les opportunités offertes à la jeunesse.
+                </p>
+            </div>
+
+            <!-- Carte Valeurs -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-200 hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Nos Valeurs</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-slate-600 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>Rigueur scientifique</li>
+                    <li class="flex items-center text-slate-600 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>Discipline</li>
+                    <li class="flex items-center text-slate-600 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>Engagement social</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ================= VERSION MOBILE (Compact Tabs) ================= -->
+        <div class="md:hidden max-w-sm mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+                
+                <!-- Header des Onglets (Style "Pill") -->
+                <div class="bg-slate-50 p-2 flex gap-1">
+                    <button onclick="switchTab('mission')" id="btn-mission" class="tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 bg-white text-blue-600 shadow-sm ring-1 ring-slate-200">
+                        Mission
+                    </button>
+                    <button onclick="switchTab('vision')" id="btn-vision" class="tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50">
+                        Vision
+                    </button>
+                    <button onclick="switchTab('valeurs')" id="btn-valeurs" class="tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50">
+                        Valeurs
+                    </button>
+                </div>
+
+                <!-- Contenu des Onglets -->
+                <div class="p-6 text-center min-h-[220px] flex flex-col justify-center items-center">
                     
-                    <!-- VERSION PC (Visible uniquement sur MD et plus) -->
-                    <div class="hidden md:grid md:grid-cols-3 gap-8">
-                        <!-- Mission -->
-                        <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-sky-300 transition duration-300 group">
-                            <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3 font-heading">Notre Mission</h3>
-                            <p class="text-slate-600 text-lg leading-relaxed">
-                                Former des cadres compétents, intègres et innovants, capables de répondre aux défis complexes du marché du travail haïtien et de contribuer activement au développement durable de la région.
-                            </p>
+                    <!-- Contenu Mission -->
+                    <div id="content-mission" class="tab-content animate-fade-in">
+                        <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-
-                        <!-- Vision -->
-                        <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-sky-300 transition duration-300 group">
-                            <div class="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center mb-6 text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3 font-heading">Notre Vision</h3>
-                            <p class="text-slate-600 text-lg leading-relaxed">
-                                Être un acteur clé de la formation universitaire dans la Région des Palmes, reconnu pour le sérieux de son enseignement et son engagement à fournir des opportunités d'avenir concrètes à la jeunesse locale.
-                            </p>
-                        </div>
-
-                        <!-- Valeurs -->
-                        <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-sky-300 transition duration-300 group">
-                            <div class="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3 font-heading">Nos Valeurs</h3>
-                            <p class="text-slate-600 mb-2">L'IFSA fonde son action sur trois piliers inébranlables qui guident chaque décision :</p>
-                            <ul class="text-slate-600 text-lg space-y-2 list-fix">
-                                <li><span class="bullet bg-emerald-500"></span>Rigueur scientifique</li>
-                                <li><span class="bullet bg-emerald-500"></span>Discipline</li>
-                                <li><span class="bullet bg-emerald-500"></span>Engagement social</li>
-                            </ul>
-                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Former des cadres compétents et intègres pour répondre aux défis du marché haïtien et contribuer au développement durable.
+                        </p>
                     </div>
 
-                    <!-- VERSION MOBILE (TABS) -->
-                    <div class="md:hidden bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden max-w-md mx-auto">
-                        <!-- Tab Headers -->
-                        <div class="flex border-b border-slate-100 bg-slate-50">
-                            <button onclick="openTab('mission')" id="btn-mission" class="tab-btn flex-1 active">Mission</button>
-                            <button onclick="openTab('vision')" id="btn-vision" class="tab-btn flex-1">Vision</button>
-                            <button onclick="openTab('valeurs')" id="btn-valeurs" class="tab-btn flex-1">Valeurs</button>
+                    <!-- Contenu Vision (Caché par défaut) -->
+                    <div id="content-vision" class="tab-content hidden animate-fade-in">
+                        <div class="w-12 h-12 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-4 text-sky-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                         </div>
-                        
-                        <!-- Tab Contents -->
-                        <div class="p-6 min-h-[200px]">
-                            <!-- Content Mission -->
-                            <div id="tab-mission" class="tab-content active">
-                                <div class="flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-blue-600">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                    </div>
-                                    <h3 class="text-lg font-bold text-slate-900 mb-2">Notre Mission</h3>
-                                    <p class="text-slate-600">Former des cadres compétents, intègres et innovants, capables de répondre aux défis complexes du marché du travail haïtien et de contribuer activement au développement durable de la région.</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Content Vision -->
-                            <div id="tab-vision" class="tab-content">
-                                <div class="flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-sky-50 rounded-full flex items-center justify-center mb-4 text-sky-500">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                    </div>
-                                    <h3 class="text-lg font-bold text-slate-900 mb-2">Notre Vision</h3>
-                                    <p class="text-slate-600">Être un acteur clé de la formation universitaire dans la Région des Palmes, reconnu pour le sérieux de son enseignement et son engagement à fournir des opportunités d'avenir concrètes à la jeunesse locale.</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Content Valeurs -->
-                            <div id="tab-valeurs" class="tab-content">
-                                <div class="flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mb-4 text-emerald-600">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    </div>
-                                    <h3 class="text-lg font-bold text-slate-900 mb-2">Nos Valeurs</h3>
-                                    <p class="text-slate-600 mb-2">L'IFSA fonde son action sur trois piliers inébranlables qui guident chaque décision :</p>
-                                    <ul class="text-slate-600 text-left space-y-2 list-fix inline-block">
-                                        <li><span class="bullet bg-emerald-500"></span>Rigueur scientifique</li>
-                                        <li><span class="bullet bg-emerald-500"></span>Discipline</li>
-                                        <li><span class="bullet bg-emerald-500"></span>Engagement social</li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Être la référence universitaire dans la Région des Palmes pour la qualité de l'enseignement et l'insertion professionnelle.
+                        </p>
+                    </div>
+
+                    <!-- Contenu Valeurs (Caché par défaut) -->
+                    <div id="content-valeurs" class="tab-content hidden animate-fade-in">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
+                        <ul class="text-left inline-block space-y-2">
+                            <li class="flex items-center text-slate-600 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>Rigueur scientifique</li>
+                            <li class="flex items-center text-slate-600 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>Discipline</li>
+                            <li class="flex items-center text-slate-600 text-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>Engagement social</li>
+                        </ul>
                     </div>
 
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
 
             <!-- Programmes -->
             <section id="programmes" class="py-16 bg-white fade-in-section">
@@ -1000,5 +1012,31 @@
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <!-- SCRIPT POUR LES ONGLETS (Ajoute ceci juste avant </body> ou dans ton fichier JS) -->
+<script>
+    function switchTab(tabName) {
+        // 1. Réinitialiser tous les boutons (Style inactif)
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.className = "tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50";
+        });
+
+        // 2. Cacher tous les contenus
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        // 3. Activer le bouton cliqué (Style actif : Blanc + Ombre + Couleur spécifique)
+        const activeBtn = document.getElementById('btn-' + tabName);
+        let activeColorClass = "text-slate-900"; // Couleur par défaut
+        if(tabName === 'mission') activeColorClass = "text-blue-600";
+        if(tabName === 'vision') activeColorClass = "text-sky-500";
+        if(tabName === 'valeurs') activeColorClass = "text-emerald-600";
+
+        activeBtn.className = `tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 bg-white shadow-sm ring-1 ring-slate-200 ${activeColorClass}`;
+
+        // 4. Afficher le contenu correspondant
+        document.getElementById('content-' + tabName).classList.remove('hidden');
+    }
+</script>
 </body>
 </html>

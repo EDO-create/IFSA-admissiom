@@ -116,37 +116,16 @@
             transition: background-color 0.3s ease;
         }
 
-        /* TABS (Onglets Mobile) Styles */
-        .tab-btn {
-            padding: 0.75rem 1rem;
-            border-bottom: 3px solid transparent;
-            color: #64748b;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            background-color: #f8fafc;
-        }
+
         .tab-btn.active {
             background-color: #0F172A; /* Bleu Marin pour l'actif */
             color: #ffffff; /* Texte blanc */
             border-bottom: none;
-        }
-        .tab-content {
-            animation: fadeIn 0.3s ease-in-out;
-        }
+    
         .tab-content.active {
             display: block;
         }
 
-        /* Animation simple pour le changement d'onglet */
-    .animate-fade-in {
-        animation: fadeIn 0.3s ease-out forwards;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(5px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
 
 
         /* Animations */
@@ -944,33 +923,6 @@
             setTimeout(() => menu.classList.add('hidden'), 400);
         }
         if(btn) btn.addEventListener('click', toggleMenu);
-
-        // ================= NOUVELLE LOGIQUE TABS (Mission/Vision) =================
-        function switchTab(tabName) {
-            // 1. Réinitialiser tous les boutons (Style inactif gris)
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50";
-            });
-
-            // 2. Cacher tous les contenus
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-
-            // 3. Activer le bouton cliqué (Style actif blanc + couleur)
-            const activeBtn = document.getElementById('btn-' + tabName);
-            let activeColorClass = "text-slate-900"; 
-            if(tabName === 'mission') activeColorClass = "text-blue-600";
-            if(tabName === 'vision') activeColorClass = "text-sky-500";
-            if(tabName === 'valeurs') activeColorClass = "text-emerald-600";
-
-            // On applique les classes Tailwind "Active"
-            activeBtn.className = `tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 bg-white shadow-sm ring-1 ring-slate-200 ${activeColorClass}`;
-
-            // 4. Afficher le contenu correspondant
-            const contentToShow = document.getElementById('content-' + tabName);
-            if(contentToShow) contentToShow.classList.remove('hidden');
-        }
 
         // ================= SCROLL ANIMATION (Fade In) =================
         const observer = new IntersectionObserver((entries) => {

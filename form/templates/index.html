@@ -990,32 +990,35 @@
         if(btn) btn.addEventListener('click', toggleMenu);
 
 
-        // ================= NOUVELLE LOGIQUE TABS (Mission/Vision) =================
-        function switchTab(tabName) {
-            // 1. Réinitialiser tous les boutons (Style inactif gris)
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50";
-            });
+       // ================= NOUVELLE LOGIQUE TABS (Mission/Vision) - STYLE COMPACT =================
+function switchTab(tabName) {
+    // 1. Cacher tous les contenus
+    document.getElementById('content-mission').classList.add('hidden');
+    document.getElementById('content-vision').classList.add('hidden');
+    document.getElementById('content-valeurs').classList.add('hidden');
 
-            // 2. Cacher tous les contenus
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
+    // 2. Afficher le contenu sélectionné
+    document.getElementById('content-' + tabName).classList.remove('hidden');
 
-            // 3. Activer le bouton cliqué (Style actif blanc + couleur)
-            const activeBtn = document.getElementById('btn-' + tabName);
-            let activeColorClass = "text-slate-900"; 
-            if(tabName === 'mission') activeColorClass = "text-blue-600";
-            if(tabName === 'vision') activeColorClass = "text-sky-500";
-            if(tabName === 'valeurs') activeColorClass = "text-emerald-600";
+    // 3. Définir le style "Inactif" (Gris, sans fond, petit texte)
+    const inactiveClass = "tab-btn flex-1 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all text-slate-400 hover:bg-white/50 border border-transparent";
 
-            // On applique les classes Tailwind "Active"
-            activeBtn.className = `tab-btn flex-1 py-2 text-xs font-bold uppercase tracking-wide rounded-xl transition-all duration-200 bg-white shadow-sm ring-1 ring-slate-200 ${activeColorClass}`;
+    // 4. Réinitialiser tous les boutons
+    document.getElementById('btn-mission').className = inactiveClass;
+    document.getElementById('btn-vision').className = inactiveClass;
+    document.getElementById('btn-valeurs').className = inactiveClass;
 
-            // 4. Afficher le contenu correspondant
-            const contentToShow = document.getElementById('content-' + tabName);
-            if(contentToShow) contentToShow.classList.remove('hidden');
-        }
+    // 5. Définir le style "Actif" (Blanc, Ombre, Bordure)
+    const activeBaseClass = "tab-btn flex-1 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all bg-white shadow-sm border border-slate-200";
+    
+    let colorClass = "";
+    if(tabName === 'mission') colorClass = "text-blue-600";
+    if(tabName === 'vision') colorClass = "text-sky-500";
+    if(tabName === 'valeurs') colorClass = "text-emerald-600";
+
+    // 6. Appliquer le style actif au bouton cliqué
+    document.getElementById('btn-' + tabName).className = `${activeBaseClass} ${colorClass}`;
+}
 
         // ================= SCROLL ANIMATION (Fade In) =================
         const observer = new IntersectionObserver((entries) => {
